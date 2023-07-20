@@ -4,9 +4,22 @@
   font-weight: normal;
   font-style: normal;
 }
+:root[color-mode="dark"] {
+  --background: black;
+  --textColor: white;
+}
+:root[color-mode="light"] {
+  --background: white;
+  --textColor: black;
+}
 
 html {
   box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--textColor);
 }
 
 body * {
@@ -75,7 +88,8 @@ body * {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--background);
+  color: var(--textColor);
   border: 1px solid #eee;
   border-radius: 5px;
 }
@@ -84,15 +98,18 @@ body * {
   width: 100%;
 }
 
-/* dark mode 처리
+/* dark mode 처리 
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000;
     color: white;
   }
+  .ImageInfo .content-wrapper {
+    background-color: black;
+    color: white;
+  }
 }
 */
-
 @media screen and (max-width: 992px) {
   .SearchResult {
     margin-top: 10px;
