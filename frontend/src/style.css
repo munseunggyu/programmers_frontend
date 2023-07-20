@@ -91,4 +91,32 @@ body * {
     color: white;
   }
 }
-*?
+*/
+
+@media screen and (max-width: 992px) {
+  .SearchResult {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-gap: 10px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .SearchResult {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    grid-gap: 10px;
+  }
+  .ImageInfo .content-wrapper {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .SearchResult {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(250px, 1fr));
+    grid-gap: 10px;
+  }
+}
