@@ -25,6 +25,13 @@ class App {
           this.setState(data);
         });
       },
+      onRamdomSearch: () => {
+        this.loading.show();
+        api.randomFetchCat().then(({ data }) => {
+          this.loading.hide();
+          this.setState(data);
+        });
+      },
     });
 
     this.searchResult = new SearchResult({

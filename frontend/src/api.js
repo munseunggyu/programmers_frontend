@@ -6,4 +6,9 @@ const api = {
     const data = await res.json();
     return data;
   },
+  randomFetchCat: async () => {
+    const res = await fetch(`${API_ENDPOINT}/api/cats/random50`);
+    const data = await res.json();
+    return data;
+  },
 };

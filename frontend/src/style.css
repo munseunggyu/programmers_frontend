@@ -153,3 +153,11 @@ body * {
     grid-gap: 10px;
   }
 }
+
+/* 검색 input, button */
+.search_container {
+  display: flex;
+}
+.search_container button {
+  width: 100px;
+}
