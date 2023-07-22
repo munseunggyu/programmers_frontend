@@ -34,9 +34,32 @@ class ImageInfo {
             <div>태생: ${origin}</div>
           </div>
         </div>`;
-      this.$imageInfo.style.display = "block";
+      const closeBtn = this.$imageInfo.querySelector(".close");
+      closeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.hide();
+      });
+      const contentWrapper = this.$imageInfo.querySelector(".content-wrapper");
+
+      contentWrapper.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+
+      this.$imageInfo.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.hide();
+      });
+      this.show();
     } else {
-      this.$imageInfo.style.display = "none";
+      this.hide();
     }
+  }
+
+  show() {
+    this.$imageInfo.style.display = "block";
+  }
+
+  hide() {
+    this.$imageInfo.style.display = "none";
   }
 }

@@ -11,4 +11,9 @@ const api = {
     const data = await res.json();
     return data;
   },
+  detailFetchCat: async (id) => {
+    const res = await fetch(`${API_ENDPOINT}/api/cats/${id}`);
+    const data = await res.json();
+    return data;
+  },
 };

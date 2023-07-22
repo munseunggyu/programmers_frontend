@@ -2,6 +2,7 @@ class SearchResult {
   $searchResult = null;
   data = null;
   onClick = null;
+  loading = null;
 
   constructor({ $target, initialData, onClick }) {
     this.$searchResult = document.createElement("ul");
@@ -10,6 +11,11 @@ class SearchResult {
 
     this.data = initialData;
     this.onClick = onClick;
+
+    this.loading = new Loading({
+      $target,
+    });
+    this.loading.render();
 
     this.render();
   }
@@ -21,18 +27,22 @@ class SearchResult {
 
   render() {
     this.$searchResult.innerHTML = this.data
-      .map(
-        (cat) => `
-          <li class="item">
+      .map((cat) => {
+        return `
+          <li class="item" data-id=${cat.id}>
             <img src=${cat.url} alt=${cat.name} />
           </li>
-        `
-      )
+        `;
+      })
       .join("");
 
     this.$searchResult.querySelectorAll(".item").forEach(($item, index) => {
       $item.addEventListener("click", () => {
-        this.onClick(this.data[index]);
+        this.loading.show();
+        api.detailFetchCat($item.dataset.id).then(({ data }) => {
+          this.loading.hide();
+          this.onClick(data);
+        });
       });
     });
   }

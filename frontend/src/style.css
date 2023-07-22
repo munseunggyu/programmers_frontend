@@ -161,3 +161,7 @@ body * {
 .search_container button {
   width: 100px;
 }
+
+.close {
+  cursor: pointer;
+}
