@@ -6,8 +6,8 @@ class SearchResult {
   $parent = null;
   isInfiniteDiv = false;
   $infiniteDiv = null;
-  observer = null;
   handleSearch = null;
+  infiniteObserver = null;
   constructor({ $target, initialData, onClick, onSearch }) {
     this.handleSearch = onSearch;
     this.$searchResult = document.createElement("ul");
@@ -32,22 +32,40 @@ class SearchResult {
     this.render();
   }
 
+  imgObserver = new IntersectionObserver(
+    (entries, io) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log();
+          entry.target.querySelector("img").src =
+            entry.target.querySelector("img").dataset.src;
+          // this.handleSearch();
+        }
+      });
+    },
+    {
+      threshold: 0.5,
+    }
+  );
+
   render() {
     if (this.$searchResult.innerHTML !== "") {
-      const addData = this.data.map((cat) => {
-        return `
+      const addData = this.data
+        .map((cat) => {
+          return `
           <li class="item" data-id=${cat.id}>
-            <img src=${cat.url} alt=${cat.name} />
+            <img src=${cat.url} alt=${cat.name} data-src=${cat.url} />
           </li>
         `;
-      });
+        })
+        .join("");
       this.$searchResult.innerHTML = this.$searchResult.innerHTML + addData;
     } else {
       this.$searchResult.innerHTML = this.data
         .map((cat) => {
           return `
             <li class="item" data-id=${cat.id}>
-              <img src=${cat.url} alt=${cat.name} />
+              <img src="https://via.placeholder.com/200x300" data-src=${cat.url}  alt=${cat.name} />
             </li>
           `;
         })
@@ -55,6 +73,7 @@ class SearchResult {
     }
 
     this.$searchResult.querySelectorAll(".item").forEach(($item, index) => {
+      this.imgObserver.observe($item);
       $item.addEventListener("click", () => {
         this.loading.show();
         api.detailFetchCat($item.dataset.id).then(({ data }) => {
@@ -67,11 +86,11 @@ class SearchResult {
       this.isInfiniteDiv = true;
       const handleSearch = this.handleSearch;
       this.$parent.appendChild(this.$infiniteDiv);
-      this.observer = new IntersectionObserver(
-        function observerFuc(entries, io) {
+      this.infiniteObserver = new IntersectionObserver(
+        (entries, io) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              handleSearch();
+              this.handleSearch();
             }
           });
         },
@@ -80,9 +99,9 @@ class SearchResult {
         }
       );
       setTimeout(() => {
-        this.observer.observe(this.$infiniteDiv);
+        this.infiniteObserver.observe(this.$infiniteDiv);
       }, 1000);
-      this.isInfiniteDiv = true;
+      //   this.isInfiniteDiv = true;
     }
   }
 }

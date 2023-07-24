@@ -3,7 +3,7 @@ console.log("app is running!");
 class App {
   $target = null;
   data = [];
-  page = 2;
+  page = 1;
   keyword = "";
 
   constructor($target) {
