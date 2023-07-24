@@ -3,6 +3,8 @@ console.log("app is running!");
 class App {
   $target = null;
   data = [];
+  page = 2;
+  keyword = "";
 
   constructor($target) {
     this.$target = $target;
@@ -19,11 +21,8 @@ class App {
     this.searchInput = new SearchInput({
       $target,
       onSearch: (keyword) => {
-        this.loading.show();
-        api.fetchCats(keyword).then(({ data }) => {
-          this.loading.hide();
-          this.setState(data);
-        });
+        this.keyword = keyword;
+        this.handleSearch();
       },
       onRamdomSearch: () => {
         this.loading.show();
@@ -43,6 +42,10 @@ class App {
           image,
         });
       },
+      onSearch: () => {
+        this.page += 1;
+        this.handleSearch();
+      },
     });
 
     this.imageInfo = new ImageInfo({
@@ -55,8 +58,15 @@ class App {
   }
 
   setState(nextData) {
-    console.log(this);
     this.data = nextData;
     this.searchResult.setState(nextData);
+  }
+
+  handleSearch() {
+    this.loading.show();
+    api.fetchCats(this.keyword, this.page).then(({ data }) => {
+      this.loading.hide();
+      this.setState(data);
+    });
   }
 }

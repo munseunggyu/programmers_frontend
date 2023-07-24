@@ -31,6 +31,10 @@ class SearchInput {
       }
     });
 
+    $searchInput.addEventListener("click", (e) => {
+      e.target.value = "";
+    });
+
     console.log("SearchInput created.", this);
   }
   render() {}
