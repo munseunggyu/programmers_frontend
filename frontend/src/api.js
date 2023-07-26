@@ -5,7 +5,7 @@ const REQUSET_ERROR = {
   500: { msg: "500 요청실패" },
 };
 
-const api = {
+export const api = {
   fetchCats: async (keyword, page) => {
     try {
       const res = await fetch(

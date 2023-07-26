@@ -1,4 +1,9 @@
-console.log("app is running!");
+import DarkModeToggle from "./DarkModeToggle.js";
+import ImageInfo from "./ImageInfo.js";
+import Loading from "./Loading.js";
+import SearchInput from "./SearchInput.js";
+import SearchResult from "./SearchResult.js";
+import { api } from "./api.js";
 
 class App {
   $target = null;
@@ -70,3 +75,5 @@ class App {
     });
   }
 }
+
+export default App;

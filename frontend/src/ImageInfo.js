@@ -63,3 +63,5 @@ class ImageInfo {
     this.$imageInfo.style.display = "none";
   }
 }
+
+export default ImageInfo;

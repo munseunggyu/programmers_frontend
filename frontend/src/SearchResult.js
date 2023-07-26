@@ -1,3 +1,6 @@
+import Loading from "./Loading.js";
+import { api } from "./api.js";
+
 class SearchResult {
   $searchResult = null;
   data = null;
@@ -105,3 +108,5 @@ class SearchResult {
     }
   }
 }
+
+export default SearchResult;
