@@ -54,10 +54,27 @@ body * {
 }
 
 .SearchResult .item {
+  position: relative;
   background-color: #eee;
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;
+}
+
+.SearchResult .item .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-size: 30px;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.SearchResult .item .content:hover {
+  opacity: 1;
 }
 
 .SearchInput {
